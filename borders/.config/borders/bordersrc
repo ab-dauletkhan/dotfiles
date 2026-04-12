@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+# Use the same dynamic category logic for startup / manual launch.
+exec "$HOME/.config/borders/update-colors.sh"

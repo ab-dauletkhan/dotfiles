@@ -1,0 +1,177 @@
+#!/usr/bin/env sh
+
+###############################################################################
+# YABAI CONFIG
+#
+# This file is just a shell script that yabai runs on startup.
+# The same commands can also be run live in Terminal while yabai is running.
+###############################################################################
+
+###############################################################################
+# SCRIPTING ADDITION
+#
+# Needed for the advanced yabai features that rely on the scripting addition.
+# Safe to keep at the top so Dock restarts re-load it automatically.
+###############################################################################
+
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+
+###############################################################################
+# DEBUGGING
+#
+# Keep this on while setting things up. Useful logs:
+#   /tmp/yabai_$USER.err.log
+#   /tmp/yabai_$USER.out.log
+###############################################################################
+
+yabai -m config debug_output on
+
+
+###############################################################################
+# LAYOUT
+#
+# Global layout:
+#   bsp   - tiled / managed by yabai
+#   float - unmanaged / standard floating macOS behavior
+#
+# Default from the docs is float, but for a tiling setup bsp is the right base.
+###############################################################################
+
+yabai -m config layout bsp
+
+# Example per-space override:
+# yabai -m config --space 2 layout float
+
+
+###############################################################################
+# WINDOW INSERTION BEHAVIOR
+#
+# first_child  -> left/top
+# second_child -> right/bottom
+#
+# second_child is a comfortable default for starting out.
+###############################################################################
+
+yabai -m config window_placement second_child
+
+
+###############################################################################
+# PADDING AND GAPS
+#
+# Compact, laptop-friendly values.
+###############################################################################
+
+yabai -m config top_padding    8
+yabai -m config bottom_padding 8
+yabai -m config left_padding   8
+yabai -m config right_padding  8
+yabai -m config window_gap     8
+
+# Example per-space override:
+# yabai -m config --space 2 window_gap 0
+
+
+###############################################################################
+# SPLIT / TREE BEHAVIOR
+#
+# auto_balance on:
+#   easier, more even, simpler to reason about
+#
+# split_ratio matters mostly when auto_balance is off, but keeping it here makes
+# the intent explicit if you later decide to switch.
+###############################################################################
+
+yabai -m config auto_balance on
+yabai -m config split_ratio 0.50
+
+
+###############################################################################
+# MOUSE SUPPORT
+#
+# Still available, but conservative. Good for a keyboard-first setup.
+###############################################################################
+
+yabai -m config mouse_modifier fn
+yabai -m config mouse_action1 move
+yabai -m config mouse_action2 resize
+yabai -m config focus_follows_mouse off
+yabai -m config mouse_follows_focus off
+
+
+###############################################################################
+# WINDOW APPEARANCE
+###############################################################################
+
+# Show shadows only for floating windows.
+yabai -m config window_shadow float
+
+# Optional opacity setup:
+# yabai -m config window_opacity on
+# yabai -m config active_window_opacity 1.0
+# yabai -m config normal_window_opacity 0.90
+
+
+###############################################################################
+# EXTERNAL BAR INTEGRATION
+#
+# Useful later if you add Sketchybar or another custom bar.
+###############################################################################
+
+# yabai -m config external_bar main:20:0
+
+
+###############################################################################
+# MENUBAR
+#
+# Leave commented unless you specifically want full menubar hiding via yabai.
+###############################################################################
+
+# yabai -m config menubar_opacity 0.0
+
+
+###############################################################################
+# BORDERS INTEGRATION
+#
+# The script below updates border colors by category:
+#
+#   bsp managed focus        -> Everforest green
+#   floating utility focus   -> Everforest yellow
+#   stack layout / stacked   -> Everforest aqua
+#   inactive windows         -> muted Everforest gray-green
+#
+# We refresh borders when focus changes, windows appear/disappear, or the
+# current space changes.
+###############################################################################
+
+yabai -m signal --add event=window_focused   action="$HOME/.config/borders/update-colors.sh"
+yabai -m signal --add event=window_created   action="$HOME/.config/borders/update-colors.sh"
+yabai -m signal --add event=window_destroyed action="$HOME/.config/borders/update-colors.sh"
+yabai -m signal --add event=space_changed    action="$HOME/.config/borders/update-colors.sh"
+
+# Run once on startup so borders come up immediately with the correct color.
+"$HOME/.config/borders/update-colors.sh"
+
+###############################################################################
+# WINDOW RULES
+#
+# Rules let specific windows behave differently from the global layout.
+# The most useful early use of rules is making utility / dialog windows float.
+#
+# manage=off = do not tile this window; let it float instead.
+###############################################################################
+
+# Small utility apps that usually feel better floating.
+yabai -m rule --add label="float-raycast"           app="^Raycast$"          manage=off
+yabai -m rule --add label="float-system-settings"   app="^System Settings$"  manage=off
+yabai -m rule --add label="float-calculator"        app="^Calculator$"       manage=off
+yabai -m rule --add label="float-activity-monitor"  app="^Activity Monitor$" manage=off
+
+# Finder transient / utility windows.
+yabai -m rule --add label="finder-dialogs" app="^Finder$" \
+  title="^(Copy|Connect|Move|Info|Preferences)$" manage=off
+
+# About This Mac window.
+yabai -m rule --add label="about-this-mac" app="^System Information$" \
+  title="^About This Mac$" manage=off
