@@ -1,11 +1,6 @@
 # dotfiles
 
-My macOS dotfiles managed with GNU Stow.
-
-## Structure
-
-- `zsh/` — zsh configuration package
-- `scripts/stow.sh` — helper script to stow packages into `$HOME`
+macOS dotfiles managed with GNU Stow.
 
 ## Requirements
 
@@ -14,30 +9,51 @@ My macOS dotfiles managed with GNU Stow.
 
 Install Stow:
 
-```bash
+```sh
 brew install stow
-````
+```
+
+## Packages
+
+- `zsh`
+- `wezterm`
+- `starship`
+- `gh`
+- `karabiner`
+- `zed`
+- `flashspace`
+- `borders`
+
+Each package mirrors the path it should create in `$HOME`.
+
+Examples:
+
+- `zsh/.zshrc` -> `~/.zshrc`
+- `wezterm/.config/wezterm/wezterm.lua` -> `~/.config/wezterm/wezterm.lua`
+- `zed/.config/zed/settings.json` -> `~/.config/zed/settings.json`
 
 ## Usage
 
-From the repo root:
+From the repo root, stow one package:
 
-```bash
+```sh
 ./scripts/stow.sh zsh
 ```
 
-This creates symlinks from the package into `$HOME`.
+Stow the default set:
 
-For example:
+```sh
+./scripts/stow.sh
+```
 
-* `zsh/.zshrc` -> `~/.zshrc`
-* `zsh/.zprofile` -> `~/.zprofile`
-* `zsh/.zshenv` -> `~/.zshenv`
-* `zsh/.config/zsh/aliases.zsh` -> `~/.config/zsh/aliases.zsh`
+Remove one package:
 
-## Remove a package
-
-```bash
-cd ~/gitted/dotfiles
+```sh
 stow -D -t "$HOME" zsh
+```
+
+Restow after changing files:
+
+```sh
+./scripts/stow.sh zsh
 ```

@@ -1,0 +1,58 @@
+{
+  "profiles" : [
+    {
+      "id" : "FA474C9F-E635-4A7D-A371-715DF8870EF7",
+      "name" : "Default",
+      "workspaces" : [
+        {
+          "apps" : [
+            {
+              "autoOpen" : true,
+              "bundleIdentifier" : "dev.zed.Zed",
+              "iconPath" : "/Applications/Zed.app/Contents/Resources/Zed.icns",
+              "name" : "Zed"
+            }
+          ],
+          "display" : "Built-in Retina Display",
+          "id" : "4C436957-C741-4A13-AFD5-0F9418A910CF",
+          "name" : "Coding",
+          "openAppsOnActivation" : true,
+          "shortcut" : "cmd+ctrl+opt+shift+z",
+          "symbolIconName" : "keyboard.fill"
+        },
+        {
+          "apps" : [
+            {
+              "autoOpen" : true,
+              "bundleIdentifier" : "com.brave.Browser",
+              "iconPath" : "/Applications/Brave Browser.app/Contents/Resources/app.icns",
+              "name" : "Brave Browser"
+            }
+          ],
+          "display" : "Built-in Retina Display",
+          "id" : "4E65397C-5E44-4EB6-9AE6-B29978A91767",
+          "name" : "Browse",
+          "openAppsOnActivation" : true,
+          "shortcut" : "cmd+ctrl+opt+shift+b",
+          "symbolIconName" : "safari.fill"
+        },
+        {
+          "apps" : [
+            {
+              "autoOpen" : true,
+              "bundleIdentifier" : "com.github.wez.wezterm",
+              "iconPath" : "/Applications/WezTerm.app/Contents/Resources/terminal.icns",
+              "name" : "WezTerm"
+            }
+          ],
+          "display" : "Built-in Retina Display",
+          "id" : "C583508D-1856-422A-9D7F-B6AED46ECA0C",
+          "name" : "Wezterm",
+          "openAppsOnActivation" : true,
+          "shortcut" : "cmd+ctrl+opt+shift+w",
+          "symbolIconName" : "apple.terminal.fill"
+        }
+      ]
+    }
+  ]
+}

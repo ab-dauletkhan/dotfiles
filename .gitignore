@@ -1,0 +1,15 @@
+.DS_Store
+Thumbs.db
+
+*.swp
+*.swo
+*~
+*.tmp
+*.bak
+*.orig
+*.rej
+
+.direnv/
+.cache/
+
+karabiner/.config/karabiner/automatic_backups/

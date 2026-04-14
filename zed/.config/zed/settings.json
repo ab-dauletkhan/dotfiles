@@ -1,0 +1,21 @@
+// Zed settings
+//
+// This is the repo-managed baseline for Zed. Keep it small and stable,
+// then layer on more language/tooling preferences as the dotfiles evolve.
+{
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "vim_mode": true,
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "Everforest Dark Hard (blur)",
+  },
+}

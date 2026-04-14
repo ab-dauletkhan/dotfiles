@@ -12,7 +12,7 @@ fi
 cd "$DOTFILES_DIR"
 
 if [ "$#" -eq 0 ]; then
-  set -- zsh wezterm starship yabai skhd borders gh
+  set -- zsh wezterm starship gh karabiner zed flashspace borders
 fi
 
 stow --restow -t "$HOME" "$@"

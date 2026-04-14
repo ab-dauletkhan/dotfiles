@@ -8,8 +8,6 @@ check out:
 - [ ] stow remaining non-stowed configs
 
 - [ ] simple-bar or sketchy bar, maybe both, right?
-- [ ] yabai and skhd and maybe hammerspoon improvements
-- [ ] borders still not perfect
 - [ ] nvim setup...not lazyvim please
 
 
