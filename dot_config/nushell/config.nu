@@ -86,6 +86,7 @@ let carapace_completer = {|spans: list<string>|
 }
 
 $env.config.completions.external = {
-    enable: true
-    completer: $carapace_completer
+    enable: false
 }
+
+use ($nu.default-config-dir | path join mise.nu)

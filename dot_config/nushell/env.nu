@@ -28,3 +28,6 @@ path add ($env.HOME | path join ".bun/bin")
 
 $env.EDITOR = "nvim"
 $env.VISUAL = "nvim"
+
+let mise_path = $nu.default-config-dir | path join mise.nu
+^mise activate nu | save $mise_path --force
