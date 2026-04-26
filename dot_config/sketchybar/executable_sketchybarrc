@@ -1,0 +1,94 @@
+#!/bin/bash
+
+CONFIG_DIR="$HOME/.config/sketchybar"
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+source "$CONFIG_DIR/colors.sh"
+
+sketchybar --bar \
+  height=32 \
+  position=top \
+  sticky=on \
+  padding_left=8 \
+  padding_right=8 \
+  color="$BAR_BG" \
+  shadow=off \
+  y_offset=0 \
+  margin=0 \
+  corner_radius=0 \
+  blur_radius=20
+
+sketchybar --default \
+  updates=when_shown \
+  icon.font="Monaspace Krypton NF:Bold:14.0" \
+  label.font="Monaspace Krypton NF:Semibold:13.0" \
+  icon.color="$FG" \
+  label.color="$FG" \
+  background.height=24 \
+  background.corner_radius=8 \
+  background.padding_left=6 \
+  background.padding_right=6 \
+  padding_left=3 \
+  padding_right=3 \
+  icon.padding_left=7 \
+  icon.padding_right=4 \
+  label.padding_left=3 \
+  label.padding_right=7
+
+# Custom FlashSpace event
+sketchybar --add event flashspace_workspace_change
+
+add_workspace() {
+  local sid="$1"
+  local name="$2"
+  local icon="$3"
+
+  sketchybar --add item "flashspace.$sid" left \
+    --set "flashspace.$sid" \
+      icon="$icon" \
+      label="$name" \
+      background.drawing=on \
+      background.color="$ITEM_BG" \
+      script="$PLUGIN_DIR/flashspace.sh $sid" \
+    --subscribe "flashspace.$sid" flashspace_workspace_change
+}
+
+add_workspace 1 terminal ""
+add_workspace 2 web      "󰖟"
+add_workspace 3 comms    "󰭹"
+add_workspace 4 ops      "󰒓"
+
+sketchybar --add item front_app left \
+  --set front_app \
+    icon="󰣆" \
+    label="App" \
+    label.color="$MUTED" \
+    background.drawing=off \
+    script="$PLUGIN_DIR/front_app.sh" \
+  --subscribe front_app front_app_switched
+
+sketchybar --add item volume right \
+  --set volume \
+    icon="" \
+    label="--" \
+    background.drawing=off \
+    script="$PLUGIN_DIR/volume.sh" \
+  --subscribe volume volume_change
+
+sketchybar --add item battery right \
+  --set battery \
+    icon="󰁹" \
+    label="--" \
+    background.drawing=off \
+    update_freq=60 \
+    script="$PLUGIN_DIR/battery.sh"
+
+sketchybar --add item clock right \
+  --set clock \
+    icon="" \
+    label="--" \
+    background.drawing=off \
+    update_freq=30 \
+    script="$PLUGIN_DIR/clock.sh"
+
+sketchybar --update
