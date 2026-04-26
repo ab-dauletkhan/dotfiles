@@ -50,16 +50,6 @@ alias jst = jj status
 alias jl = jj log
 
 # -----------------------------
-# Zoxide
-# -----------------------------
-
-let zoxide_init = ($nu.default-config-dir | path join "zoxide.nu")
-
-if ($zoxide_init | path exists) {
-    source $zoxide_init
-}
-
-# -----------------------------
 # Useful custom commands
 # -----------------------------
 
