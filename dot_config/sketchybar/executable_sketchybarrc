@@ -53,10 +53,67 @@ add_workspace() {
     --subscribe "flashspace.$sid" flashspace_workspace_change
 }
 
-add_workspace 1 terminal ""
-add_workspace 2 web      "󰖟"
-add_workspace 3 comms    "󰭹"
-add_workspace 4 ops      "󰒓"
+workspace_icon() {
+  case "$1" in
+    apple.terminal.fill) printf "" ;;
+    safari.fill) printf "󰖟" ;;
+    brain.fill) printf "󰚩" ;;
+    book.fill) printf "" ;;
+    *)
+      case "$(printf "%s" "$2" | tr "[:upper:]" "[:lower:]")" in
+        terminal) printf "" ;;
+        browser) printf "󰖟" ;;
+        ai) printf "󰚩" ;;
+        reading) printf "" ;;
+        *) printf "󰒓" ;;
+      esac
+      ;;
+  esac
+}
+
+load_flashspace_workspaces() {
+  local profiles_file="$HOME/.config/flashspace/profiles.toml"
+
+  awk '
+    /^\[\[profiles\.workspaces\]\]/ {
+      if (in_workspace && name != "") print name "\t" symbol
+      in_workspace = 1
+      name = ""
+      symbol = ""
+      next
+    }
+    /^\[/ {
+      if (in_workspace && name != "") print name "\t" symbol
+      in_workspace = 0
+      name = ""
+      symbol = ""
+      next
+    }
+    in_workspace && /^name = / {
+      value = $0
+      sub(/^name = /, "", value)
+      gsub(/^'\''|'\''$/, "", value)
+      name = value
+      next
+    }
+    in_workspace && /^symbolIconName = / {
+      value = $0
+      sub(/^symbolIconName = /, "", value)
+      gsub(/^'\''|'\''$/, "", value)
+      symbol = value
+      next
+    }
+    END {
+      if (in_workspace && name != "") print name "\t" symbol
+    }
+  ' "$profiles_file"
+}
+
+workspace_number=1
+while IFS=$'\t' read -r workspace_name symbol_icon_name; do
+  add_workspace "$workspace_number" "$workspace_name" "$(workspace_icon "$symbol_icon_name" "$workspace_name")"
+  workspace_number=$((workspace_number + 1))
+done < <(load_flashspace_workspaces)
 
 sketchybar --add item front_app left \
   --set front_app \

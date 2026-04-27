@@ -1,7 +1,8 @@
-font-family = Monaspace Neon NF
-font-feature = ss01,ss02,ss03,ss04,ss05,ss06,ss07,ss08,ss09,ss10
+font-family = Monaspace Krypton Var
+font-family = Symbols Nerd Font Mono
+font-feature = ss01,ss02,ss03,ss04,ss05,ss06,ss07,ss08,ss09,ss10,calt,liga
 font-size = 14
-adjust-cell-height = 5%
+adjust-cell-height = 10%
 theme = Everforest Dark Hard
 env = XDG_CONFIG_HOME=/Users/dauletkhan/.config
 env = XDG_DATA_HOME=/Users/dauletkhan/.local/share
