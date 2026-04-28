@@ -1,151 +1,57 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-CONFIG_DIR="$HOME/.config/sketchybar"
-PLUGIN_DIR="$CONFIG_DIR/plugins"
+export CONFIG_DIR="${CONFIG_DIR:-$HOME/.config/sketchybar}"
 
 source "$CONFIG_DIR/colors.sh"
+source "$CONFIG_DIR/settings.sh"
+source "$CONFIG_DIR/icons.sh"
+source "$CONFIG_DIR/helpers.sh"
 
+# Reset
+sketchybar --remove '/.*/'
+
+# Global bar: transparent / glassy, no black slab
 sketchybar --bar \
-  height=32 \
   position=top \
-  sticky=on \
-  padding_left=8 \
-  padding_right=8 \
-  color="$BAR_BG" \
-  shadow=off \
-  y_offset=0 \
-  margin=0 \
+  height="$BAR_HEIGHT" \
+  color="$TRANSPARENT" \
+  blur_radius=30 \
+  margin=4 \
   corner_radius=0 \
-  blur_radius=20
+  padding_left=10 \
+  padding_right=10 \
+  sticky=on \
+  topmost=window \
+  shadow=off
 
+# Defaults for all items
 sketchybar --default \
-  updates=when_shown \
-  icon.font="Monaspace Krypton NF:Bold:14.0" \
-  label.font="Monaspace Krypton NF:Semibold:13.0" \
+  updates=on \
+  drawing=on \
+  padding_left="$ITEM_PADDING_LEFT" \
+  padding_right="$ITEM_PADDING_RIGHT" \
+  icon.font="$ICON_FONT" \
   icon.color="$FG" \
+  icon.padding_left="$ICON_PADDING_LEFT" \
+  icon.padding_right="$ICON_PADDING_RIGHT" \
+  label.font="$FONT" \
   label.color="$FG" \
-  background.height=24 \
-  background.corner_radius=8 \
-  background.padding_left=6 \
-  background.padding_right=6 \
-  padding_left=3 \
-  padding_right=3 \
-  icon.padding_left=7 \
-  icon.padding_right=4 \
-  label.padding_left=3 \
-  label.padding_right=7
+  label.padding_left="$LABEL_PADDING_LEFT" \
+  label.padding_right="$LABEL_PADDING_RIGHT" \
+  background.drawing=on \
+  background.color="$CAPSULE_BG" \
+  background.border_color="$CAPSULE_BORDER" \
+  background.border_width="$BORDER_WIDTH" \
+  background.height="$ITEM_HEIGHT" \
+  background.corner_radius="$CAPSULE_RADIUS"
 
-# Custom FlashSpace event
-sketchybar --add event flashspace_workspace_change
+# Items
+source "$ITEM_DIR/workspace.sh"
+source "$ITEM_DIR/front_app.sh"
 
-add_workspace() {
-  local sid="$1"
-  local name="$2"
-  local icon="$3"
+source "$ITEM_DIR/clock.sh"
+source "$ITEM_DIR/battery.sh"
+source "$ITEM_DIR/input_source.sh"
 
-  sketchybar --add item "flashspace.$sid" left \
-    --set "flashspace.$sid" \
-      icon="$icon" \
-      label="$name" \
-      background.drawing=on \
-      background.color="$ITEM_BG" \
-      script="$PLUGIN_DIR/flashspace.sh $sid" \
-    --subscribe "flashspace.$sid" flashspace_workspace_change
-}
-
-workspace_icon() {
-  case "$1" in
-    apple.terminal.fill) printf "" ;;
-    safari.fill) printf "󰖟" ;;
-    brain.fill) printf "󰚩" ;;
-    book.fill) printf "" ;;
-    *)
-      case "$(printf "%s" "$2" | tr "[:upper:]" "[:lower:]")" in
-        terminal) printf "" ;;
-        browser) printf "󰖟" ;;
-        ai) printf "󰚩" ;;
-        reading) printf "" ;;
-        *) printf "󰒓" ;;
-      esac
-      ;;
-  esac
-}
-
-load_flashspace_workspaces() {
-  local profiles_file="$HOME/.config/flashspace/profiles.toml"
-
-  awk '
-    /^\[\[profiles\.workspaces\]\]/ {
-      if (in_workspace && name != "") print name "\t" symbol
-      in_workspace = 1
-      name = ""
-      symbol = ""
-      next
-    }
-    /^\[/ {
-      if (in_workspace && name != "") print name "\t" symbol
-      in_workspace = 0
-      name = ""
-      symbol = ""
-      next
-    }
-    in_workspace && /^name = / {
-      value = $0
-      sub(/^name = /, "", value)
-      gsub(/^'\''|'\''$/, "", value)
-      name = value
-      next
-    }
-    in_workspace && /^symbolIconName = / {
-      value = $0
-      sub(/^symbolIconName = /, "", value)
-      gsub(/^'\''|'\''$/, "", value)
-      symbol = value
-      next
-    }
-    END {
-      if (in_workspace && name != "") print name "\t" symbol
-    }
-  ' "$profiles_file"
-}
-
-workspace_number=1
-while IFS=$'\t' read -r workspace_name symbol_icon_name; do
-  add_workspace "$workspace_number" "$workspace_name" "$(workspace_icon "$symbol_icon_name" "$workspace_name")"
-  workspace_number=$((workspace_number + 1))
-done < <(load_flashspace_workspaces)
-
-sketchybar --add item front_app left \
-  --set front_app \
-    icon="󰣆" \
-    label="App" \
-    label.color="$MUTED" \
-    background.drawing=off \
-    script="$PLUGIN_DIR/front_app.sh" \
-  --subscribe front_app front_app_switched
-
-sketchybar --add item volume right \
-  --set volume \
-    icon="" \
-    label="--" \
-    background.drawing=off \
-    script="$PLUGIN_DIR/volume.sh" \
-  --subscribe volume volume_change
-
-sketchybar --add item battery right \
-  --set battery \
-    icon="󰁹" \
-    label="--" \
-    background.drawing=off \
-    update_freq=60 \
-    script="$PLUGIN_DIR/battery.sh"
-
-sketchybar --add item clock right \
-  --set clock \
-    icon="" \
-    label="--" \
-    background.drawing=off \
-    update_freq=30 \
-    script="$PLUGIN_DIR/clock.sh"
-
+# Initial update
 sketchybar --update

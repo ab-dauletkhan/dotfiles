@@ -1,12 +1,31 @@
-font-family = Monaspace Krypton Var
-font-family = Symbols Nerd Font Mono
-font-feature = ss01,ss02,ss03,ss04,ss05,ss06,ss07,ss08,ss09,ss10,calt,liga
+window-decoration = auto
+macos-titlebar-style = tabs
+macos-window-buttons = hidden
+macos-titlebar-proxy-icon = hidden
+macos-non-native-fullscreen = false
+
+
+window-new-tab-position = current
+tab-inherit-working-directory = true
+window-inherit-font-size = true
+window-save-state = default
+
+
+font-family = "Monaspace Krypton Var"
+font-family = "Symbols Nerd Font Mono"
 font-size = 14
+font-feature = ss01,ss02,ss03,ss04,ss05,ss06,ss07,ss08,ss09,ss10,calt,liga
 adjust-cell-height = 10%
-theme = Everforest Dark Hard
+
+
+theme = "Everforest Dark Hard"
+background-opacity = 0.9
+background-blur = true
+
+
 env = XDG_CONFIG_HOME=/Users/dauletkhan/.config
 env = XDG_DATA_HOME=/Users/dauletkhan/.local/share
 
-# Shell
+
 command = direct:/opt/homebrew/bin/nu
 shell-integration = nushell

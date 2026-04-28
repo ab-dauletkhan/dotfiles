@@ -1,0 +1,78 @@
+[[profiles]]
+id = '69B01F75-399A-4222-9971-78E82B44D750'
+name = 'Default'
+
+[[profiles.workspaces]]
+assignAppShortcut = 'opt+shift+1'
+display = 'Built-in Retina Display'
+id = 'ACF3A00E-98F7-4E17-8425-B7EC6005184E'
+name = 'Terminal'
+openAppsOnActivation = true
+shortcut = 'opt+1'
+symbolIconName = 'apple.terminal.fill'
+
+[[profiles.workspaces.apps]]
+bundleIdentifier = 'com.mitchellh.ghostty'
+iconPath = '/Applications/Ghostty.app/Contents/Resources/Ghostty.icns'
+name = 'Ghostty'
+
+[[profiles.workspaces]]
+assignAppShortcut = 'opt+shift+2'
+display = 'Built-in Retina Display'
+id = '3BBC66A5-CCF2-47DF-85E0-1C3C6175B529'
+name = 'Browser'
+openAppsOnActivation = true
+shortcut = 'opt+2'
+symbolIconName = 'safari.fill'
+
+[[profiles.workspaces.apps]]
+bundleIdentifier = 'com.brave.Browser'
+iconPath = '/Applications/Brave Browser.app/Contents/Resources/app.icns'
+name = 'Brave Browser'
+
+[[profiles.workspaces]]
+assignAppShortcut = 'opt+shift+3'
+display = 'Built-in Retina Display'
+id = 'BC2A546F-8106-409D-AD6E-38F2642C720F'
+name = 'AI'
+openAppsOnActivation = true
+shortcut = 'opt+3'
+symbolIconName = 'brain.fill'
+
+[[profiles.workspaces.apps]]
+autoOpen = true
+bundleIdentifier = 'com.openai.codex'
+iconPath = '/Applications/Codex.app/Contents/Resources/electron.icns'
+name = 'Codex'
+
+[[profiles.workspaces]]
+assignAppShortcut = 'opt+shift+4'
+display = 'Built-in Retina Display'
+id = '6633539E-6CE4-4FD6-88D5-A0021CAC0B90'
+name = 'Reading'
+openAppsOnActivation = false
+shortcut = 'opt+4'
+symbolIconName = 'book.fill'
+
+[[profiles.workspaces.apps]]
+bundleIdentifier = 'com.apple.Preview'
+iconPath = '/System/Applications/Preview.app/Contents/Resources/AppIcon.icns'
+name = 'Preview'
+
+[[profiles.workspaces]]
+assignAppShortcut = 'opt+shift+5'
+display = 'Built-in Retina Display'
+id = 'DDC9BC03-1BE7-4F0B-8856-404B95B5F006'
+name = 'Others'
+openAppsOnActivation = false
+shortcut = 'opt+5'
+
+[[profiles.workspaces.apps]]
+bundleIdentifier = 'com.apple.systempreferences'
+iconPath = '/System/Applications/System Settings.app/Contents/Resources/SystemSettings.icns'
+name = 'System Settings'
+
+[[profiles.workspaces.apps]]
+bundleIdentifier = 'com.apple.AppStore'
+iconPath = '/System/Applications/App Store.app/Contents/Resources/AppIcon.icns'
+name = 'App Store'
