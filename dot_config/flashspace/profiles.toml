@@ -7,7 +7,7 @@ assignAppShortcut = 'opt+shift+1'
 display = 'Built-in Retina Display'
 id = 'ACF3A00E-98F7-4E17-8425-B7EC6005184E'
 name = 'Terminal'
-openAppsOnActivation = true
+openAppsOnActivation = false
 shortcut = 'opt+1'
 symbolIconName = 'apple.terminal.fill'
 
@@ -21,7 +21,7 @@ assignAppShortcut = 'opt+shift+2'
 display = 'Built-in Retina Display'
 id = '3BBC66A5-CCF2-47DF-85E0-1C3C6175B529'
 name = 'Browser'
-openAppsOnActivation = true
+openAppsOnActivation = false
 shortcut = 'opt+2'
 symbolIconName = 'safari.fill'
 
@@ -33,31 +33,35 @@ name = 'Brave Browser'
 [[profiles.workspaces]]
 assignAppShortcut = 'opt+shift+3'
 display = 'Built-in Retina Display'
-id = 'BC2A546F-8106-409D-AD6E-38F2642C720F'
-name = 'AI'
-openAppsOnActivation = true
+id = '6633539E-6CE4-4FD6-88D5-A0021CAC0B90'
+name = 'Coding'
+openAppsOnActivation = false
 shortcut = 'opt+3'
-symbolIconName = 'brain.fill'
+symbolIconName = 'keyboard.fill'
 
 [[profiles.workspaces.apps]]
-autoOpen = true
-bundleIdentifier = 'com.openai.codex'
-iconPath = '/Applications/Codex.app/Contents/Resources/electron.icns'
-name = 'Codex'
+bundleIdentifier = 'dev.zed.Zed'
+iconPath = '/Applications/Zed.app/Contents/Resources/Zed.icns'
+name = 'Zed'
+
+[[profiles.workspaces.apps]]
+bundleIdentifier = 'com.jetbrains.pycharm'
+iconPath = '/Applications/PyCharm.app/Contents/Resources/pycharm.icns'
+name = 'PyCharm'
 
 [[profiles.workspaces]]
 assignAppShortcut = 'opt+shift+4'
 display = 'Built-in Retina Display'
-id = '6633539E-6CE4-4FD6-88D5-A0021CAC0B90'
-name = 'Reading'
+id = 'BC2A546F-8106-409D-AD6E-38F2642C720F'
+name = 'AI'
 openAppsOnActivation = false
 shortcut = 'opt+4'
-symbolIconName = 'book.fill'
+symbolIconName = 'brain.fill'
 
 [[profiles.workspaces.apps]]
-bundleIdentifier = 'com.apple.Preview'
-iconPath = '/System/Applications/Preview.app/Contents/Resources/AppIcon.icns'
-name = 'Preview'
+bundleIdentifier = 'com.openai.codex'
+iconPath = '/Applications/Codex.app/Contents/Resources/electron.icns'
+name = 'Codex'
 
 [[profiles.workspaces]]
 assignAppShortcut = 'opt+shift+5'
@@ -76,3 +80,43 @@ name = 'System Settings'
 bundleIdentifier = 'com.apple.AppStore'
 iconPath = '/System/Applications/App Store.app/Contents/Resources/AppIcon.icns'
 name = 'App Store'
+
+[[profiles.workspaces.apps]]
+bundleIdentifier = 'com.apple.calculator'
+iconPath = '/System/Applications/Calculator.app/Contents/Resources/AppIcon.icns'
+name = 'Calculator'
+
+[[profiles.workspaces.apps]]
+bundleIdentifier = 'com.apple.iCal'
+iconPath = '/System/Applications/Calendar.app/Contents/Resources/AppIcon.icns'
+name = 'Calendar'
+
+[[profiles.workspaces.apps]]
+bundleIdentifier = 'com.apple.clock'
+iconPath = '/System/Applications/Clock.app/Contents/Resources/AppIcon.icns'
+name = 'Clock'
+
+[[profiles.workspaces.apps]]
+bundleIdentifier = 'com.apple.TV'
+iconPath = '/System/Applications/TV.app/Contents/Resources/AppIcon.icns'
+name = 'TV'
+
+[[profiles.workspaces.apps]]
+bundleIdentifier = 'com.apple.weather'
+iconPath = '/System/Applications/Weather.app/Contents/Resources/AppIcon.icns'
+name = 'Weather'
+
+[[profiles.workspaces.apps]]
+bundleIdentifier = 'com.apple.VoiceMemos'
+iconPath = '/System/Applications/VoiceMemos.app/Contents/Resources/VoiceMemosApp.icns'
+name = 'Voice Memos'
+
+[[profiles.workspaces.apps]]
+bundleIdentifier = 'com.apple.helpviewer'
+iconPath = '/System/Applications/Tips.app/Contents/Resources/AppIcon.icns'
+name = 'Tips'
+
+[[profiles.workspaces.apps]]
+bundleIdentifier = 'com.apple.Preview'
+iconPath = '/System/Applications/Preview.app/Contents/Resources/AppIcon.icns'
+name = 'Preview'

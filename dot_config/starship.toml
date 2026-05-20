@@ -1,6 +1,6 @@
 # Cozy power-user Starship prompt
 # Theme: Everforest Dark Hard
-# Shell target: Nushell + Ghostty + Monaspace Krypton NF
+# Shell targets: zsh / bash / fish / Nushell + Ghostty + Monaspace Krypton NF
 
 "$schema" = "https://starship.rs/config-schema.json"
 
@@ -14,7 +14,7 @@ command_timeout = 500
 format = """
 ($status$cmd_duration$battery$hostname
 [────────────────](bright-black)
-)$directory$git_branch$git_status$git_state${custom.jj}$mise$rust$zig$golang$python${custom.uv}$pixi$nodejs$bun$deno$lua$swift$kotlin$docker_context$container$jobs
+)$shell$directory$git_branch$git_status$git_state${custom.jj}$mise$rust$zig$golang$python${custom.uv}$pixi$nodejs$bun$deno$lua$swift$kotlin$docker_context$container$jobs
 $character"""
 
 # ─────────────────────────────────────────────────────────────
@@ -35,7 +35,7 @@ map_symbol = true
 
 [cmd_duration]
 disabled = false
-min_time = 750
+min_time = 100
 show_milliseconds = true
 format = "[ $duration]($style) "
 style = "bold yellow"
@@ -62,6 +62,16 @@ trim_at = "."
 # ─────────────────────────────────────────────────────────────
 # Current workspace line
 # ─────────────────────────────────────────────────────────────
+
+[shell]
+disabled = false
+format = "[$indicator]($style) "
+zsh_indicator = "zsh"
+bash_indicator = "bash"
+fish_indicator = "fish"
+nu_indicator = "nu"
+unknown_indicator = "sh"
+style = "bold cyan"
 
 [directory]
 style = "bold blue"
@@ -248,9 +258,6 @@ disabled = true
 disabled = true
 
 [os]
-disabled = true
-
-[shell]
 disabled = true
 
 [memory_usage]

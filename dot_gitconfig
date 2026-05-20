@@ -9,3 +9,5 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/opt/homebrew/bin/gh auth git-credential
+[includeIf "gitdir:/Users/dauletkhan/gitted/astanahub/"]
+	path = ~/.gitconfig-astanahub

@@ -47,11 +47,12 @@ sketchybar --default \
 
 # Items
 source "$ITEM_DIR/workspace.sh"
-source "$ITEM_DIR/front_app.sh"
 
 source "$ITEM_DIR/clock.sh"
 source "$ITEM_DIR/battery.sh"
 source "$ITEM_DIR/input_source.sh"
+
+"$PLUGIN_DIR/omniwm_watch.sh" >/dev/null 2>&1 &
 
 # Initial update
 sketchybar --update

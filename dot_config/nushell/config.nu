@@ -30,8 +30,7 @@ $env.config.buffer_editor = "nvim"
 
 alias ll = eza -lah --icons=auto --git --group-directories-first
 alias la = eza -la --icons=auto --git --group-directories-first
-alias lt = eza --tree --level=2 --icons=auto --group-directories-first
-alias lta = eza --tree --level=3 --icons=auto --group-directories-first
+alias lt = eza --tree --icons=auto --group-directories-first
 
 alias b = bat --paging=never
 alias v = nvim
